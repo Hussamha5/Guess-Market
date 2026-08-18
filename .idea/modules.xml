@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DTOModule/DTOModule.iml" filepath="$PROJECT_DIR$/DTOModule/DTOModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EngineModule/EngineModule.iml" filepath="$PROJECT_DIR$/EngineModule/EngineModule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GuessMarket.iml" filepath="$PROJECT_DIR$/GuessMarket.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UIModule/UIModule.iml" filepath="$PROJECT_DIR$/UIModule/UIModule.iml" />
+    </modules>
+  </component>
+</project>

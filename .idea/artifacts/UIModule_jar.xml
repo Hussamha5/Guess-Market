@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="UIModule:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/UIModule_jar</output-path>
+    <root id="archive" name="UIModule.jar">
+      <element id="module-output" name="DTOModule" />
+      <element id="module-output" name="EngineModule" />
+      <element id="module-output" name="UIModule" />
+    </root>
+  </artifact>
+</component>
