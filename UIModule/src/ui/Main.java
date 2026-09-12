@@ -65,7 +65,7 @@ public class Main {
                             OutcomeDTO[] outcomes = e.getOutcomes();
                             System.out.println("Options     : 1) " + outcomes[0].getName() + " | 2) " + outcomes[1].getName());
 
-                            System.out.println("Status      : " + (e.isActive() ? "ACTIVE" : "CLOSED"));
+                            System.out.println("Status      : " + (e.getStatus().equals("Active") ? "ACTIVE" : "CLOSED"));
                             System.out.println("------------------------------------------");
                         }
                     }
@@ -105,7 +105,7 @@ public class Main {
                     java.util.List<Integer> activeIndices = new java.util.ArrayList<>();
 
                     for (int i = 0; i < allEvents.size(); i++) {
-                        if (allEvents.get(i).isActive()) {
+                        if (allEvents.get(i).getStatus().equals("Active")) {
                             activeIndices.add(i);
                         }
                     }
@@ -192,7 +192,7 @@ public class Main {
                     java.util.List<Integer> activeCloseIndices = new java.util.ArrayList<>();
 
                     for (int i = 0; i < allEvts.size(); i++) {
-                        if (allEvts.get(i).isActive()) {
+                        if (allEvts.get(i).getStatus().equals("Active")) {
                             activeCloseIndices.add(i);
                         }
                     }
@@ -309,7 +309,7 @@ public class Main {
         System.out.println("==================================================");
         System.out.println("Name        : " + selectedEvent.getName());
         System.out.println("Description : " + selectedEvent.getDescription());
-        System.out.println("Status      : " + (selectedEvent.isActive() ? "ACTIVE" : "CLOSED"));
+        System.out.println("Status      : " + (selectedEvent.getStatus().equals("Active") ? "ACTIVE" : "CLOSED"));
         System.out.println("Commission  : " + selectedEvent.getCommission() + "% (" + selectedEvent.getCommissionType() + ")");
 
         System.out.printf("Acc. Balance: $%.2f\n", selectedEvent.getMmBalance());

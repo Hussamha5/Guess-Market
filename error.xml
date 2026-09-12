@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Guess-Market xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="GM-EX2-Schema.xsd">
+    <GM-events>
+        <GM-event name="World Cap Winner">
+            <id>2</id>
+            <description>Who do you think will win the world cap ?</description>
+            <commission type="on-close">15</commission>
+            <GM-options>
+                <GM-option>Argentina</GM-option>
+                <GM-option>Spain</GM-option>
+            </GM-options>
+            <GM-method>
+                <GM-order-book allow-mint="true" initial="100" d="1"/>
+            </GM-method>
+        </GM-event>
+    </GM-events>
+    <GM-users>
+        <GM-user name="Avrum">
+            <initial-cash>0</initial-cash>
+            <GM-market-maker>
+                <event id="2"/>
+            </GM-market-maker>
+        </GM-user>
+    </GM-users>
+</Guess-Market>

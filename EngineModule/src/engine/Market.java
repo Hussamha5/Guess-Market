@@ -4,19 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 public class Market implements Engine, java.io.Serializable {
     private List <Event> events;
+    private List<User> users;
     public Market()
     {
         this.events = new ArrayList<>();
     }
 
     @Override
-    public java.util.List<dto.EventDTO> getEvents() {
-        java.util.List<dto.EventDTO> dtoList = new java.util.ArrayList<>();
-        // עוברים על כל האירועים הפנימיים, ממירים אותם ל-DTO, ואוספים לרשימה חדשה
-        for (Event e : events) {
-            dtoList.add(e.toDTO());
+    public List<dto.EventDTO> getEvents() {
+        List<dto.EventDTO> eventDTOs = new ArrayList<>();
+        if (this.events != null) {
+            for (Event e : this.events) {
+                // במקום לנסות לבנות DTO חלקי, פשוט קוראים לפונקציה המוכנה!
+                eventDTOs.add(e.toDTO());
+            }
         }
-        return dtoList;
+        return eventDTOs;
     }
 
     public void addEvent(Event ev)
@@ -36,8 +39,11 @@ public class Market implements Engine, java.io.Serializable {
     }
     @Override
     public void loadXml(String filePath) throws Exception {
-        List<Event> loadedEvents = XmlParser.loadEvents(filePath);
-        this.events = loadedEvents;
+        XmlParser.ParsedData parsedData = XmlParser.loadMarketData(filePath);
+
+        this.events = parsedData.events;
+        this.users = parsedData.users;
+
     }
 
     @Override
@@ -50,12 +56,24 @@ public class Market implements Engine, java.io.Serializable {
         return new double[]{0.0, 0.0, 0.0};
     }
 
+
     @Override
     public void resolveEvent(int eventIndex, int winningIndex) {
-        // ניגשים ישירות לרשימת האירועים האמיתית הפנימית של המנוע
+        if (eventIndex >= 0 && eventIndex < events.size()) {
+            events.get(eventIndex).resolveEvent(winningIndex, this.users);
+        }
+    }
+
+    @Override
+    public void activateEvent(int eventIndex, String username) {
         if (eventIndex >= 0 && eventIndex < events.size()) {
             Event event = events.get(eventIndex);
-            event.resolveEvent(winningIndex);
+            for (User u : this.users) {
+                if (u.getName().equals(username)) {
+                    event.activateEvent(u);
+                    break;
+                }
+            }
         }
     }
     @Override
@@ -66,4 +84,63 @@ public class Market implements Engine, java.io.Serializable {
         }
         return null;
     }
+    @Override
+    public List<dto.UserDTO> getUsers() {
+        List<dto.UserDTO> userDTOs = new ArrayList<>();
+        if (this.users != null) {
+            for (User u : this.users) {
+                userDTOs.add(new dto.UserDTO(
+                        u.getName(), u.getBalance(), u.getPortfolio(), u.getMmEventIds(),
+                        u.getCommissionsPaid() == null ? new java.util.HashMap<>() : u.getCommissionsPaid(),
+                        u.getNetInvestments() == null ? new java.util.HashMap<>() : u.getNetInvestments(),
+                        u.getFinalPayouts() == null ? new java.util.HashMap<>() : u.getFinalPayouts()
+                ));
+            }
+        }
+        return userDTOs;
+    }
+
+    @Override
+    public void placeOrder(int eventIndex, String username, int optionIndex, double price, int quantity, boolean isBuy) {
+        if (eventIndex >= 0 && eventIndex < events.size()) {
+            Event event = events.get(eventIndex);
+            User currentUser = null;
+
+            // חיפוש המשתמש שיזם את הפעולה
+            if (this.users != null) {
+                for (User u : this.users) {
+                    if (u.getName().equals(username)) {
+                        currentUser = u;
+                        break;
+                    }
+                }
+            }
+
+            if (currentUser != null) {
+                event.placeOrder(currentUser, optionIndex, price, quantity, isBuy,this.users);
+            }
+        }
+    }
+    public void processLmsrBuy(int eventIndex, String username, int optionIndex, int quantity) {
+        if (eventIndex >= 0 && eventIndex < events.size()) {
+            Event event = events.get(eventIndex);
+            User buyer = null;
+            if (this.users != null) {
+                for (User u : this.users) {
+                    if (u.getName().equals(username)) {
+                        buyer = u; break;
+                    }
+                }
+            }
+            if (buyer != null) {
+                double[] result = event.buyShares(optionIndex, quantity);
+
+                buyer.updateBalance(-result[2]); // מוריד לו את סך התשלום מהיתרה
+                buyer.addShares(event.getId(), optionIndex, quantity);
+                buyer.addInvestment(event.getId(), result[0]); // הוספת הוצאה להשקעות
+                buyer.addCommission(event.getId(), result[1]); // הוספת עמלה
+            }
+        }
+    }
+
 }

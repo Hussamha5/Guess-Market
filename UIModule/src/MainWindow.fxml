@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" fitToHeight="true" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.AppController">
+    <BorderPane prefHeight="650.0" prefWidth="900.0">
+
+        <top>
+            <HBox spacing="15.0" alignment="CENTER_LEFT" BorderPane.alignment="CENTER" style="-fx-padding: 10px; -fx-border-color: #cccccc; -fx-border-width: 0 0 1 0;">
+                <Button fx:id="btnLoadXml" mnemonicParsing="false" onAction="#handleLoadXml" text="Load XML" style="-fx-font-weight: bold;" />
+                <ProgressBar fx:id="progressBar" prefWidth="150.0" progress="0.0" />
+                <Label fx:id="lblStatus" text="Waiting for XML..." textFill="#333333" />
+                <Region HBox.hgrow="ALWAYS" />
+                <CheckBox fx:id="chkAnimations" text="Enable Animations" style="-fx-font-weight: bold;" />
+                <ComboBox fx:id="cmbTheme" onAction="#handleThemeChange" promptText="Choose Theme" prefWidth="150.0"/>
+            </HBox>
+        </top>
+
+        <left>
+            <VBox spacing="10.0" prefWidth="250.0" BorderPane.alignment="CENTER" style="-fx-padding: 10px; -fx-border-color: #cccccc; -fx-border-width: 0 1 0 0;">
+                <Label text="Users:" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                <ListView fx:id="usersListView" prefHeight="150.0" VBox.vgrow="SOMETIMES" />
+
+                <Separator />
+                <Label text="Event Filters:" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                <ComboBox fx:id="cmbFilterType" promptText="All Types" maxWidth="Infinity" onAction="#applyFilters"/>
+                <ComboBox fx:id="cmbFilterStatus" promptText="All Statuses" maxWidth="Infinity" onAction="#applyFilters"/>
+                <ComboBox fx:id="cmbFilterComm" promptText="All Commissions" maxWidth="Infinity" onAction="#applyFilters"/>
+                <Label text="Events:" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                <ListView fx:id="eventsListView" VBox.vgrow="ALWAYS" />
+            </VBox>
+        </left>
+
+        <center>
+            <VBox spacing="15.0" BorderPane.alignment="CENTER" style="-fx-padding: 20px;">
+                <!-- פרטי משתמש -->
+                <HBox spacing="20.0">
+                    <Label fx:id="lblUserName" text="Name: ---" style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+                    <Label fx:id="lblUserBalance" text="Balance: ---" style="-fx-font-size: 16px; -fx-text-fill: green; -fx-font-weight: bold;" />
+                </HBox>
+                <TextArea fx:id="txtUserDetails" prefHeight="100.0" editable="false" promptText="User portfolio will appear here..." style="-fx-font-family: 'Courier New';"/>
+
+                <Separator />
+
+                <!-- פרטי אירוע וניהול -->
+                <HBox spacing="20.0" alignment="CENTER_LEFT">
+                    <VBox spacing="5.0">
+                        <Label fx:id="lblEventName" text="Event Name: ---" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #0055aa;" />
+                        <Label fx:id="lblEventStatus" text="Status: ---" />
+                        <Label fx:id="lblEventMethod" text="Method: ---" />
+                        <Label fx:id="lblEventCommission" text="Commission: ---" />
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <VBox spacing="10.0">
+                        <Button fx:id="btnActivate" text="Activate Event" onAction="#handleActivateEvent" style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold;" disable="true"/>
+                        <Button fx:id="btnClose" text="Close Event" onAction="#handleCloseEvent" style="-fx-background-color: #9C27B0; -fx-text-fill: white; -fx-font-weight: bold;" disable="true"/>
+                    </VBox>
+                </HBox>
+
+                <Separator />
+
+                <!-- אזור מסחר -->
+                <Label text="Trade:" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <ComboBox fx:id="cmbOptions" prefWidth="150.0" promptText="Select Option" />
+                    <TextField fx:id="txtQuantity" promptText="Quantity" prefWidth="70.0" />
+                    <TextField fx:id="txtPrice" promptText="Price" prefWidth="70.0" />
+                    <Button fx:id="btnBuy" mnemonicParsing="false" onAction="#handleBuy" text="Buy" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" />
+                    <Button fx:id="btnSell" mnemonicParsing="false" onAction="#handleSell" text="Sell" style="-fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold;" />
+                </HBox>
+
+                <Separator />
+
+                <!-- ספר פקודות / עסקאות -->
+                <Label text="Transactions / Order Book:" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+                <ListView fx:id="orderBookListView" prefHeight="150.0" VBox.vgrow="ALWAYS" />
+
+                <!-- סטטיסטיקות -->
+                <HBox spacing="15.0" alignment="CENTER_LEFT" style="-fx-padding: 10px; -fx-background-radius: 5; -fx-border-color: #555555; -fx-border-width: 1px;">
+                    <Label fx:id="lblLast" text="Last: ---" style="-fx-font-weight: bold;" />
+                    <Label fx:id="lblBid" text="Bid: ---" textFill="green" style="-fx-font-weight: bold;" />
+                    <Label fx:id="lblAsk" text="ASK: ---" textFill="red" style="-fx-font-weight: bold;" />
+                    <Label fx:id="lblMid" text="Mid: ---" style="-fx-font-weight: bold;" />
+                    <Label fx:id="lblSpread" text="Spread: ---" style="-fx-font-weight: bold;" />
+                </HBox>
+            </VBox>
+        </center>
+    </BorderPane>
+</ScrollPane>

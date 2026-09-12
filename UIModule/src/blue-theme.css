@@ -1,0 +1,16 @@
+.root {
+    -fx-background-color: #e3f2fd;
+}
+
+.label {
+    -fx-text-fill: #0d47a1;
+    -fx-font-family: "Georgia";
+    -fx-font-size: 15px;
+}
+
+.button {
+    -fx-background-color: #1565c0;
+    -fx-text-fill: white;
+    -fx-border-color: #000000;
+    -fx-border-width: 2px;
+}
