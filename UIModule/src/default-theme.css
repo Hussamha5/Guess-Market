@@ -1,0 +1,24 @@
+/* The default look (the standard JavaFX look) plus the small rules that the screens of the client use. */
+
+.error-text   { -fx-text-fill: #c62828; }
+.success-text { -fx-text-fill: #2e7d32; }
+.positive     { -fx-text-fill: #2e7d32; }
+.negative     { -fx-text-fill: #c62828; }
+
+.app-title     { -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #0055aa; }
+.login-title   { -fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #0055aa; }
+.login-card    { -fx-border-color: #bdbdbd; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #fafafa; }
+.header        { -fx-border-color: #cccccc; -fx-border-width: 0 0 1 0; }
+.status-bar    { -fx-border-color: #cccccc; -fx-border-width: 1 0 0 0; }
+.section-title { -fx-font-size: 14px; -fx-font-weight: bold; }
+.caption       { -fx-font-weight: bold; }
+.event-title   { -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #0055aa; }
+.balance       { -fx-font-size: 20px; -fx-font-weight: bold; }
+.option-title  { -fx-font-weight: bold; }
+.option-pane   { -fx-border-color: #bdbdbd; -fx-border-radius: 6; -fx-background-radius: 6; -fx-background-color: #fafafa; }
+
+.buy-button       { -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; }
+.sell-button      { -fx-background-color: #f44336; -fx-text-fill: white; -fx-font-weight: bold; }
+.activate-button  { -fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold; }
+.close-button     { -fx-background-color: #9C27B0; -fx-text-fill: white; -fx-font-weight: bold; }
+.load-file-button { -fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold; }

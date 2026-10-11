@@ -13,4 +13,40 @@
     -fx-text-fill: white;
     -fx-border-color: #000000;
     -fx-border-width: 2px;
+
 }
+
+
+.table-view .column-header .label { -fx-text-fill: #0d47a1; -fx-font-weight: bold; -fx-font-size: 13px; }
+.table-row-cell:filled:selected { -fx-background-color: #1565c0; }
+.table-row-cell:filled:selected .table-cell { -fx-text-fill: white; }
+.table-cell { -fx-text-fill: #0d47a1; }
+.tab-pane .tab:selected { -fx-background-color: #1565c0; }
+.tab-pane .tab .tab-label { -fx-text-fill: #0d47a1; }
+.tab-pane .tab:selected .tab-label { -fx-text-fill: white; -fx-font-weight: bold; }
+.scroll-pane { -fx-background-color: transparent; }
+.scroll-pane > .viewport { -fx-background-color: transparent; }
+.check-box { -fx-text-fill: #0d47a1; }
+
+.error-text   { -fx-text-fill: #c62828; }
+.success-text { -fx-text-fill: #1b5e20; }
+.positive     { -fx-text-fill: #1b5e20; }
+.negative     { -fx-text-fill: #c62828; }
+
+.app-title     { -fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #0d47a1; }
+.login-title   { -fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #0d47a1; }
+.login-card    { -fx-border-color: #1565c0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #f1f8ff; }
+.header        { -fx-border-color: #90caf9; -fx-border-width: 0 0 1 0; }
+.status-bar    { -fx-border-color: #90caf9; -fx-border-width: 1 0 0 0; }
+.section-title { -fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: #0d47a1; }
+.caption       { -fx-font-weight: bold; }
+.event-title   { -fx-font-size: 19px; -fx-font-weight: bold; -fx-text-fill: #0d47a1; }
+.balance       { -fx-font-size: 20px; -fx-font-weight: bold; }
+.option-title  { -fx-font-weight: bold; }
+.option-pane   { -fx-border-color: #64b5f6; -fx-border-radius: 6; -fx-background-radius: 6; -fx-background-color: #f1f8ff; }
+
+.buy-button       { -fx-background-color: #2e7d32; -fx-text-fill: white; -fx-font-weight: bold; }
+.sell-button      { -fx-background-color: #c62828; -fx-text-fill: white; -fx-font-weight: bold; }
+.activate-button  { -fx-background-color: #0277bd; -fx-text-fill: white; -fx-font-weight: bold; }
+.close-button     { -fx-background-color: #6a1b9a; -fx-text-fill: white; -fx-font-weight: bold; }
+.load-file-button { -fx-background-color: #2e7d32; -fx-text-fill: white; -fx-font-weight: bold; }

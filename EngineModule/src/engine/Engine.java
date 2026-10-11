@@ -1,18 +1,32 @@
 package engine;
 
+import dto.AccountDTO;
+import dto.EventDTO;
+import dto.UserDTO;
+
+import java.io.InputStream;
 import java.util.List;
+
+
 public interface Engine {
-    void loadXml(String filePath) throws Exception;
 
-    List<dto.EventDTO> getEvents();
+    String getOrCreateUser(String name);
 
-    dto.EventDTO getEventByIndex(int index);
+    void loadFunds(String userName, double amount);
 
-    double[] buyShares(int eventIndex,int optionIndex,int quantity);
-    void placeOrder(int eventIndex, String username, int optionIndex, double price, int quantity, boolean isBuy);
+    List<String> uploadEvents(String userName, String fileName, InputStream xmlContent);
 
-    void resolveEvent(int eventIndex,int winIndex);
-    List<dto.UserDTO> getUsers();
-    void activateEvent(int eventIndex, String username);
+    String activateEvent(String userName, String eventName);
 
+    String closeEvent(String userName, String eventName, int option);
+
+    String trade(String userName, String eventName, int option, boolean buy, Double price, int quantity);
+
+    List<EventDTO> getEvents();
+
+    List<UserDTO> getUsers();
+
+    AccountDTO getAccount(String userName, int lastSerialSeen);
+
+    long getVersion();
 }

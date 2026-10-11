@@ -1,35 +1,20 @@
 package dto;
 
-import java.util.List;
-import java.util.Map;
-
+/** What every user is allowed to see about the other users: name, balance and whether he is a Market Maker. */
 public class UserDTO {
     private final String name;
     private final double balance;
-    private final Map<String, Map<Integer, Integer>> portfolio;
-    private final List<String> mmEventIds;
-    private final Map<String, Double> commissionsPaid;
-    private final Map<String, Double> netInvestments;
-    private final Map<String, Double> finalPayouts;
+    private final boolean marketMaker;
 
-    public UserDTO(String name, double balance, Map<String, Map<Integer, Integer>> portfolio, List<String> mmEventIds,
-                   Map<String, Double> commissionsPaid, Map<String, Double> netInvestments, Map<String, Double> finalPayouts) {
+    public UserDTO(String name, double balance, boolean marketMaker) {
         this.name = name;
         this.balance = balance;
-        this.portfolio = portfolio;
-        this.mmEventIds = mmEventIds;
-        this.commissionsPaid = commissionsPaid;
-        this.netInvestments = netInvestments;
-        this.finalPayouts = finalPayouts;
+        this.marketMaker = marketMaker;
     }
 
     public String getName() { return name; }
     public double getBalance() { return balance; }
-    public Map<String, Map<Integer, Integer>> getPortfolio() { return portfolio; }
-    public List<String> getMmEventIds() { return mmEventIds; }
-    public Map<String, Double> getCommissionsPaid() { return commissionsPaid; }
-    public Map<String, Double> getNetInvestments() { return netInvestments; }
-    public Map<String, Double> getFinalPayouts() { return finalPayouts; }
+    public boolean isMarketMaker() { return marketMaker; }
 
     @Override
     public String toString() {

@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="guess-market">
+    <output-path>$PROJECT_DIR$/out/artifacts/guess_market</output-path>
+    <root id="archive" name="guess-market.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="DTOModule" />
+          <element id="module-output" name="EngineModule" />
+          <element id="module-output" name="ServerModule" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="google.code.gson" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

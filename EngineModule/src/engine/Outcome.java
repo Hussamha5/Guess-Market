@@ -1,10 +1,9 @@
 package engine;
 
-import java.io.Serializable;
-
-public class Outcome implements Serializable {
+public class Outcome {
     private String name;
-    private int quantity;
+    private int quantity;       // the number of shares of this option that exist
+    private double lastPrice;   // the price of the last trade (order book events)
 
     private OrderBook orderBook;
 
@@ -28,5 +27,13 @@ public class Outcome implements Serializable {
 
     public void addQuantity(int amount) {
         this.quantity += amount;
+    }
+
+    public double getLastPrice() {
+        return lastPrice;
+    }
+
+    public void setLastPrice(double lastPrice) {
+        this.lastPrice = lastPrice;
     }
 }

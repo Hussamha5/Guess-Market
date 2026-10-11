@@ -1,38 +1,26 @@
 package engine;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.PriorityQueue;
 
-public class OrderBook implements Serializable {
+public class OrderBook {
 
-    private static class BidComparator implements Comparator<Order>, Serializable {
-        @Override
-        public int compare(Order o1, Order o2) {
-            if (o1.getPrice() == o2.getPrice()) {
-                return Long.compare(o1.getTimestamp(), o2.getTimestamp());
-            }
-            return Double.compare(o2.getPrice(), o1.getPrice());
-        }
-    }
+    // the highest price first; the same price: the order that arrived first
+    private static final Comparator<Order> BID_ORDER = (o1, o2) -> {
+        int byPrice = Double.compare(o2.getPrice(), o1.getPrice());
+        return byPrice != 0 ? byPrice : Long.compare(o1.getSequence(), o2.getSequence());
+    };
 
-    private static class AskComparator implements Comparator<Order>, Serializable {
-        @Override
-        public int compare(Order o1, Order o2) {
-            if (o1.getPrice() == o2.getPrice()) {
-                return Long.compare(o1.getTimestamp(), o2.getTimestamp());
-            }
-            return Double.compare(o1.getPrice(), o2.getPrice());
-        }
-    }
+    // the lowest price first; the same price: the order that arrived first
+    private static final Comparator<Order> ASK_ORDER = (o1, o2) -> {
+        int byPrice = Double.compare(o1.getPrice(), o2.getPrice());
+        return byPrice != 0 ? byPrice : Long.compare(o1.getSequence(), o2.getSequence());
+    };
 
-    private PriorityQueue<Order> bids; // תור קונים
-    private PriorityQueue<Order> asks; // תור מוכרים
-
-    public OrderBook() {
-        this.bids = new PriorityQueue<>(new BidComparator());
-        this.asks = new PriorityQueue<>(new AskComparator());
-    }
+    private final PriorityQueue<Order> bids = new PriorityQueue<>(BID_ORDER); // buyers
+    private final PriorityQueue<Order> asks = new PriorityQueue<>(ASK_ORDER); // sellers
 
     public void addBid(Order order) { bids.add(order); }
     public void addAsk(Order order) { asks.add(order); }
@@ -48,4 +36,50 @@ public class OrderBook implements Serializable {
 
     public PriorityQueue<Order> getBids() { return bids; }
     public PriorityQueue<Order> getAsks() { return asks; }
+
+    /** All the waiting buy orders, the best one first. */
+    public List<Order> sortedBids() {
+        List<Order> copy = new ArrayList<>(bids);
+        copy.sort(BID_ORDER);
+        return copy;
+    }
+
+    /** All the waiting sell orders, the best one first. */
+    public List<Order> sortedAsks() {
+        List<Order> copy = new ArrayList<>(asks);
+        copy.sort(ASK_ORDER);
+        return copy;
+    }
+
+    /** The number of shares that this user already offers for sale in this book. */
+    public int sharesOfferedBy(String username) {
+        int total = 0;
+        for (Order order : asks) {
+            if (order.getUsername().equals(username)) {
+                total += order.getQuantity();
+            }
+        }
+        return total;
+    }
+
+    /** The number of waiting orders (buy and sell) of this user. */
+    public int ordersOf(String username) {
+        int count = 0;
+        for (Order order : bids) {
+            if (order.getUsername().equals(username)) {
+                count++;
+            }
+        }
+        for (Order order : asks) {
+            if (order.getUsername().equals(username)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public void clear() {
+        bids.clear();
+        asks.clear();
+    }
 }

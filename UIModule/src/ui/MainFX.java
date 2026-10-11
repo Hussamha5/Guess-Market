@@ -1,24 +1,30 @@
 package ui;
 
+import ui.net.ApiClient;
+import ui.net.ServerConfig;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/** The JavaFX application of the Guess Market client. It talks to the server only over HTTP (see ApiClient). */
 public class MainFX extends Application {
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        // טעינת קובץ העיצוב שנייצר מיד
-        Parent root = FXMLLoader.load(getClass().getResource("/MainWindow.fxml"));
+    private AppShell shell;
 
-        primaryStage.setTitle("Guess Market - JavaFX");
-        primaryStage.setScene(new Scene(root, 800, 600)); // גודל החלון
-        primaryStage.show();
+    @Override
+    public void start(Stage stage) {
+        shell = new AppShell(stage, new ApiClient(ServerConfig.baseUrl()));
+        shell.start();
+    }
+
+    @Override
+    public void stop() {
+        if (shell != null) {
+            shell.shutdown();
+        }
+        System.exit(0); // no thread of the HTTP library may keep the program alive
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch(MainFX.class, args);
     }
 }
