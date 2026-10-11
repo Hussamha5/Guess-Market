@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact name="client">
+    <output-path>$PROJECT_DIR$/out/artifacts/client</output-path>
+    <root id="root">
+      <element id="archive" name="guess-market-client.jar">
+        <element id="module-output" name="DTOModule" />
+        <element id="module-output" name="UIModule" />
+      </element>
+      <element id="directory" name="lib">
+        <element id="library" level="project" name="openjfx.javafx.fxml" />
+        <element id="library" level="project" name="google.code.gson" />
+        <element id="library" level="project" name="squareup.okhttp3.okhttp" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/client/run-client.bat" />
+    </root>
+  </artifact>
+</component>
